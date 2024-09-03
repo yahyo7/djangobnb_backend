@@ -1,3 +1,61 @@
-env
+# Python specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+env/
+venv/
+*.env
+*.venv
+*.pyenv
+*.python-version
+Pipfile.lock
+*.db
+*.sqlite3
 
-.env
+# Django specific
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.sqlite3
+*.log
+
+# IDE and Editor specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Other
+coverage/
+nosetests.xml
+*.cover
+*.py,cover
+*.hypothesis/
+*.tox/
+*.nox/
+*.coverage
+*.coverage.*
+*.cache
+*.test
+*.egg-info
+dist/
+build/
+*.egg
+*.egg-info
+*.dist-info
+*.venv
+*.ipynb_checkpoints/
