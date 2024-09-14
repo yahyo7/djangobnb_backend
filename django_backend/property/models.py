@@ -14,7 +14,7 @@ class Property(models.Model):
     bathrooms = models.IntegerField()
     guests = models.IntegerField()
     country = models.CharField(max_length=100)
-    country_code = models.CharField(max_length=10)
+    country_code = models.CharField(max_length=20)
     category = models.CharField(max_length=100)
     # favourited
     image = models.ImageField(upload_to='uploads/properties')
