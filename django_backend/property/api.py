@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from .forms import PropertyForm
-from .models import Property
+from .models import Property, Reservation
 from .serializers import PropertiesListSerializer
 from .serializers import PropertiesDetailSerializer
 
@@ -40,3 +40,27 @@ def create_property(request):
     else:
         print('error', form.errors, form.non_field_errors)
         return JsonResponse({'errors': form.errors.as_json()}, status=400)
+    
+@api_view(['POST'])
+def book_property(request, pk):
+    try: 
+        check_in = request.POST.get('check_in', '')
+        check_out = request.POST.get('check_out', '')
+        number_of_nights = request.POST.get('number_of_nights', '')
+        total_price = request.POST.get('total_price', '')
+        guests = request.POST.get('guests', '')
+        
+        property = Property.objects.get(pk=pk)
+        
+        Reservation.objects.create(
+            property=property,
+            check_in=check_in,
+            check_out=check_out,
+            number_of_nights=number_of_nights,
+            total_price=total_price,
+            guests=guests,
+            created_by=request.user
+        )
+    except Exception as e:
+        print("error", e)
+    return JsonResponse({'success': True})
