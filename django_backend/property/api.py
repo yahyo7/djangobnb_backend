@@ -6,8 +6,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 
 from .forms import PropertyForm
 from .models import Property, Reservation
-from .serializers import PropertiesListSerializer
-from .serializers import PropertiesDetailSerializer
+from .serializers import PropertiesListSerializer, PropertiesDetailSerializer, ReservationSerializer
 
 @api_view(['GET'])
 @authentication_classes([])
@@ -68,3 +67,13 @@ def book_property(request, pk):
     except Exception as e:
         print("error", e)
         return JsonResponse({'success': False})
+    
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([])
+def property_reservations(request, pk):
+    property = Property.objects.get(pk=pk)
+    reservations = property.reservations.all()
+    
+    serializer = ReservationSerializer(reservations, many=True)
+    return JsonResponse(serializer.data, safe=False)
